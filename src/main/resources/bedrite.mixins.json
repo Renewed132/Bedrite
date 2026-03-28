@@ -4,7 +4,8 @@
   "package": "pl.olafcio.bedrite.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "AbstractMinecartEntityMixin"
+    "AbstractMinecartEntityMixin",
+    "MobEntityMixin"
   ],
   "client": [
     "InGameHudMixin"
