@@ -23,6 +23,9 @@ dependencies {
     mappings(legacy.yarn(project.minecraft_version, project.yarn_build))
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+    // Mods
+    modImplementation files(rootDir.toPath().resolve("run/mods/Renewed-0.2-beta.jar"))
+
     // Dependencies
     implementation 'com.google.code.gson:gson:2.8.9'
     include 'com.google.code.gson:gson:2.8.9'
