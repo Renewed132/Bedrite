@@ -1,3 +1,5 @@
+import java.nio.file.Files
+
 plugins {
     id "net.fabricmc.fabric-loom-remap" version "${loom_version}"
     id "legacy-looming" version "${loom_version}" // Version must be the same as fabric-loom's
@@ -27,7 +29,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Mods
-    modImplementation files(rootDir.toPath().resolve("run/mods/Renewed-0.2-beta.jar"))
+    modImplementation files(Files.list(rootDir.toPath().resolve("run/mods/")).findAny().orElseThrow())
 
     // Dependencies
     implementation 'com.google.code.gson:gson:2.8.9'
