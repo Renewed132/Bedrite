@@ -35,8 +35,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     include 'com.google.code.gson:gson:2.8.9'
 
-    implementation 'com.google.guava:guava:11.0.2'
-    include 'com.google.guava:guava:11.0.2'
+    implementation 'com.google.guava:guava:32.0.1-android'
+    include 'com.google.guava:guava:32.0.1-android'
 
     // Mixin Addons
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.1")))
