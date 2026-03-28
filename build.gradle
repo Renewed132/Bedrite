@@ -16,6 +16,9 @@ legacyLooming {}
 
 repositories {
     mavenCentral()
+
+    maven { url = "https://maven.bawnorton.com/releases" }
+    maven { url = "https://maven.enjarai.dev/mirrors" }
 }
 
 dependencies {
@@ -29,6 +32,12 @@ dependencies {
     // Dependencies
     implementation 'com.google.code.gson:gson:2.8.9'
     include 'com.google.code.gson:gson:2.8.9'
+
+    implementation 'com.google.guava:guava:11.0.2'
+    include 'com.google.guava:guava:11.0.2'
+
+    // Mixin Addons
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.1")))
 
     // Tests
     testImplementation platform('org.junit:junit-bom:5.10.0')
