@@ -2,9 +2,13 @@ package pl.olafcio.bedrite.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.Window;
 import org.lwjgl.opengl.GL11;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,5 +48,25 @@ public class InGameHudMixin {
     @Inject(at = @At("TAIL"), method = "render")
     public void tail(float partialTick, boolean inScreen, int mouseX, int mouseY, CallbackInfo ci) {
         GL11.glTranslatef(-10F, -10F, 0F);
+    }
+
+    // CUSTOM ELEMENTS //
+    @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", opcode = Opcodes.GETFIELD), method = "render")
+    public boolean debugEnabled(GameOptions instance) {
+        boolean value = instance.debugEnabled;
+        if (!value) {
+            Minecraft mc = Minecraft.getMinecraft();
+            String text = String.format("Position: %d, %d, %d", (int)mc.playerEntity.x, (int)mc.playerEntity.y, (int)mc.playerEntity.z);
+            int y = 55;
+
+            DrawableHelper.fill(-20, y, -20 + 9*2 + mc.textRenderer.getStringWidth(text), y + 16, 0xaa000000);
+            mc.textRenderer.method_956(
+                    text,
+                    -6, y + 4,
+                    0xffffffff
+            );
+        }
+
+        return value;
     }
 }
