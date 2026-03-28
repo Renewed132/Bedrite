@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "bedrite",
+  "version": "${version}",
+  "name": "Bedrite",
+  "description": "Makes Minecraft look & act like MC Bedrock Edition.",
+  "authors": [
+    "Olafcio"
+  ],
+  "contact": {
+    "homepage": "https://olafcio.pl/",
+    "sources": "https://github.com/Renewed132/Bedrite"
+  },
+  "license": "Apache License",
+  "icon": "assets/bedrite/icon.png",
+  "jars": [
+  ],
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "pl.olafcio.bedrite.Bedrite"
+    ]
+  },
+  "mixins": [
+    "bedrite.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
