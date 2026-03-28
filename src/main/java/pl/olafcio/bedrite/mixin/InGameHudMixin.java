@@ -14,8 +14,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import pl.olafcio.bedrite.Feature;
 
 @Mixin(InGameHud.class)
+@Feature("Padded HUD")
 public class InGameHudMixin {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/Window;getWidth()I"), method = "render")
     public int getWidth(Window instance) {
@@ -52,6 +54,7 @@ public class InGameHudMixin {
 
     // CUSTOM ELEMENTS //
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", opcode = Opcodes.GETFIELD), method = "render")
+    @Feature("HUD Position element")
     public boolean debugEnabled(GameOptions instance) {
         boolean value = instance.debugEnabled;
         if (!value) {
