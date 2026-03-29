@@ -8,6 +8,7 @@ import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import pl.olafcio.bedrite.Feature;
 import pl.olafcio.renewed.features.NewBlock;
 
 @Mixin(SpiderEntity.class)
@@ -17,6 +18,7 @@ public abstract class SpiderEntityMixin extends Entity {
     }
 
     @WrapMethod(method = "method_2660")
+    @Feature("Spiders not able to climb on magma")
     public boolean canClimb(Operation<Boolean> original) {
         if (!original.call())
             return false;

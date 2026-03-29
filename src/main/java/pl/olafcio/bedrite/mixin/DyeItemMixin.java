@@ -6,10 +6,12 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import pl.olafcio.bedrite.Feature;
 
 @Mixin(DyeItem.class)
 public class DyeItemMixin {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getBlock(III)I", ordinal = 0), method = "method_3355")
+    @Feature("Growing sugarcane with bone meal")
     public int use__getBlock(World world, int x, int y, int z) {
         int block = world.getBlock(x, y, z);
         if (block == Block.SUGARCANE.id) {
