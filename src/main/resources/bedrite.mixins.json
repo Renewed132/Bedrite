@@ -6,7 +6,8 @@
   "mixins": [
     "AbstractMinecartEntityMixin",
     "MobEntityMixin",
-    "SnowballEntityMixin"
+    "SnowballEntityMixin",
+    "SpiderEntityMixin"
   ],
   "client": [
     "InGameHudMixin"
