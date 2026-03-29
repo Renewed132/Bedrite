@@ -9,8 +9,10 @@ import net.minecraft.entity.thrown.ThrowableEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import pl.olafcio.bedrite.Feature;
 
 @Mixin(SnowballEntity.class)
+@Feature("Snowballs catching on fire and putting this state on mob hit")
 public abstract class SnowballEntityMixin extends ThrowableEntity {
     public SnowballEntityMixin(World world) {
         super(world);
