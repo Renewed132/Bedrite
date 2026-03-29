@@ -10,6 +10,7 @@
     "ExperienceOrbEntityMixin",
     "FishingRodItemMixin",
     "FurnaceBlockMixin",
+    "HoeItemMixin",
     "ItemMixin",
     "MobEntityMixin",
     "SnowballEntityMixin",
