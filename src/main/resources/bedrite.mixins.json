@@ -9,6 +9,7 @@
     "EnchantingTableBlockMixin",
     "FishingRodItemMixin",
     "FurnaceBlockMixin",
+    "ItemMixin",
     "MobEntityMixin",
     "SnowballEntityMixin",
     "SpiderEntityMixin"
