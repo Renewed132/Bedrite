@@ -17,6 +17,7 @@
     "SpiderEntityMixin"
   ],
   "client": [
+    "ClientPlayerEntityMixin",
     "InGameHudMixin"
   ],
   "injectors": {
