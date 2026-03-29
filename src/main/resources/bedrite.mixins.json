@@ -6,6 +6,7 @@
   "mixins": [
     "AbstractMinecartEntityMixin",
     "DyeItemMixin",
+    "FurnaceBlockMixin",
     "MobEntityMixin",
     "SnowballEntityMixin",
     "SpiderEntityMixin"
