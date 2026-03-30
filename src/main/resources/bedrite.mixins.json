@@ -17,9 +17,12 @@
     "SpiderEntityMixin"
   ],
   "client": [
+    "ButtonWidgetMixin",
     "ClientPlayerEntityMixin",
     "GameRendererMixin",
-    "InGameHudMixin"
+    "InGameHudMixin",
+    "TextRendererMixin",
+    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
