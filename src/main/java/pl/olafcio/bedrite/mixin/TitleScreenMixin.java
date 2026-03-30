@@ -73,10 +73,18 @@ public class TitleScreenMixin extends Screen {
     }
 
     @ModifyConstant(constant = {
-            @Constant(intValue = 72)
+            @Constant(intValue = 72, ordinal = 0),
+            @Constant(intValue = 72, ordinal = 1),
+            @Constant(intValue = 72, ordinal = 2)
     }, method = "init")
-    public int init__newButton__optLangQuit__y(int constant) {
+    public int init__newButton__optQuit__y(int constant) {
         return (30+2)*3 - 12;
+    }
+
+    @ModifyArgs(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/LanguageButton;<init>(III)V"), method = "init")
+    public void init__newButton__language(Args args) {
+        args.set(1, 8);
+        args.set(2, (int)args.get(2) + 19);
     }
 
     //-------//
