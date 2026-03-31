@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'pl.olafcio.bedrite'
-version = '26.1'
+version = '26.2'
 
 base {
     archivesName = project.archives_base_name
