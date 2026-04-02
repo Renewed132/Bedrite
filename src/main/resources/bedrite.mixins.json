@@ -9,6 +9,7 @@
     "EnchantingTableBlockMixin",
     "ExperienceOrbEntityMixin",
     "FishingRodItemMixin",
+    "FlatChunkGeneratorMixin",
     "FurnaceBlockMixin",
     "HoeItemMixin",
     "ItemMixin",
