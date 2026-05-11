@@ -25,7 +25,7 @@
     "bedrite.mixins.json"
   ],
   "depends": {
-    "renewed": ">=0.2-beta",
+    "renewed": ">=26.5.1",
     "fabricloader": ">=${loader_version}",
     "minecraft": "${minecraft_version}"
   }
