@@ -25,6 +25,7 @@
     "GameRendererMixin",
     "InGameHudMixin",
     "LanguageButtonMixin",
+    "MinecraftMixin",
     "TextRendererMixin",
     "TitleScreenMixin"
   ],
