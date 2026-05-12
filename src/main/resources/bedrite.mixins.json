@@ -28,7 +28,8 @@
     "LanguageButtonMixin",
     "MinecraftMixin",
     "TextRendererMixin",
-    "TitleScreenMixin"
+    "TitleScreenMixin",
+    "accessors.IWorldRenderer"
   ],
   "injectors": {
     "defaultRequire": 1
