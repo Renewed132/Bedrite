@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import pl.olafcio.bedrite.mixin.accessors.IWorldRenderer;
+import pl.olafcio.bedrite.util.StringUtil;
 import pl.olafcio.renewed.mixin.accessors.IClientPlayerInteractionManager;
 import pl.olafcio.renewed.mixin.accessors.IMinecraft;
 import pl.olafcio.renewed.mixinclass.DebugHud;
@@ -45,7 +45,7 @@ public class DebugHudMixin {
 
         return new String[]{
                 "Minecraft v" + FabricLoader.getInstance().getRawGameVersion(),
-                "Mode: " + capitalize(((IClientPlayerInteractionManager) mc.interactionManager).gameMode().getGameModeName()),
+                "Mode: " + StringUtil.capitalize(((IClientPlayerInteractionManager) mc.interactionManager).gameMode().getGameModeName()),
                 String.format("XYZ: %.3f / %.5f / %.3f", mc.playerEntity.x, mc.playerEntity.y, mc.playerEntity.z),
                 String.format("Camera XYZ: %.3f / %.5f / %.3f", mc.cameraEntity.x, mc.cameraEntity.y, mc.cameraEntity.z),
                 // Camera Target XYZ: %.3f / %.5f / %.3f
@@ -106,11 +106,6 @@ public class DebugHudMixin {
                 "Router History",
                 "[/]"
         };
-    }
-
-    @Unique
-    private String capitalize(String text) {
-        return String.valueOf(text.charAt(0)).toUpperCase() + text.substring(1).toLowerCase();
     }
 
     /**
