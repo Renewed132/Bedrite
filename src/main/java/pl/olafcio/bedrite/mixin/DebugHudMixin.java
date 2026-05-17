@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import pl.olafcio.bedrite.mixin.accessors.IWorldRenderer;
+import pl.olafcio.bedrite.mixin.accessors.AWorldRenderer;
 import pl.olafcio.bedrite.util.StringUtil;
 import pl.olafcio.renewed.mixin.accessors.IClientPlayerInteractionManager;
 import pl.olafcio.renewed.mixin.accessors.IMinecraft;
@@ -55,7 +55,7 @@ public class DebugHudMixin {
                 String.format("Chunk: %d %d %d in %d %d %d", 0,0,0,0,0,0),
                 String.format("Facing: ? (Towards negative/positive X/Y/Z) (?.? / ?.?)"),
                 String.format("Speed: %.2f m/s", mc.playerEntity.horizontalSpeed),
-                String.format("Render Chunks: %d / %d", ((IWorldRenderer) mc.worldRenderer).have(), ((IWorldRenderer) mc.worldRenderer).all()),
+                String.format("Render Chunks: %d / %d", ((AWorldRenderer) mc.worldRenderer).have(), ((AWorldRenderer) mc.worldRenderer).all()),
                 String.format("Biome: %s", chunk.getBiome(x & 0xF, z & 0xF, this.mc.world.getBiomeSource()).name),
                 String.format("Base light: %d (%d sky, %d block)", Math.min(15, skyLight + blockLight), skyLight, blockLight),
                 String.format("Light: %d (%d sky, %d block)", Math.min(15, skyLight + blockLight), skyLight, blockLight),

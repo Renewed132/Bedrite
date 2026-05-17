@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(WorldRenderer.class)
-public interface IWorldRenderer {
+public interface AWorldRenderer {
     @Accessor("field_1896")
     int have();
 

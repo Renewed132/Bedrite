@@ -29,7 +29,9 @@
     "MinecraftMixin",
     "TextRendererMixin",
     "TitleScreenMixin",
-    "accessors.IWorldRenderer"
+    "accessors.AButtonWidget",
+    "accessors.ATitleScreen",
+    "accessors.AWorldRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

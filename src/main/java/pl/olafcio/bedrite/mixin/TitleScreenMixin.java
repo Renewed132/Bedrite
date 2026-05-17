@@ -1,5 +1,6 @@
 package pl.olafcio.bedrite.mixin;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -9,6 +10,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import pl.olafcio.bedrite.mixininterface.ITextRenderer;
+import pl.olafcio.bedrite.screen.play.PlayScreen;
 
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class TitleScreenMixin extends Screen {
             @Constant(intValue = 48, ordinal = 0)
     }, method = "init")
     public int button__start(int constant) {
-        return 56;
+        return 56 - 24;
     }
 
     @ModifyConstant(constant = {
@@ -59,6 +61,23 @@ public class TitleScreenMixin extends Screen {
     @Redirect(at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 3), method = "init")
     public <E> boolean init__addButton__quit(List<E> instance, E e) {
         return false;
+    }
+
+    @Redirect(at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 0), method = "method_1724")
+    public <E> boolean initNormal__addButton__singleplayer(List<E> instance, E e) {
+        return false;
+    }
+
+    @ModifyConstant(constant = {
+            @Constant(stringValue = "menu.multiplayer")
+    }, method = "method_1724")
+    public String initNormal__buttonTranslation__multiplayer(String constant) {
+        return "menu.play";
+    }
+
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;openScreen(Lnet/minecraft/client/gui/screen/Screen;)V", ordinal = 3), method = "buttonClicked")
+    public void buttonClicked__multiplayer(Minecraft instance, Screen screen) {
+        mc.openScreen(new PlayScreen((TitleScreen) (Object) this));
     }
 
     @ModifyConstant(constant = {
