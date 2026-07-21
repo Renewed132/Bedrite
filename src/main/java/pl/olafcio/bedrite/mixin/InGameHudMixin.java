@@ -5,20 +5,28 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.Window;
 import org.lwjgl.opengl.GL11;
-import org.objectweb.asm.Opcodes;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import pl.olafcio.bedrite.Feature;
 
+import static pl.olafcio.bedrite.util.HudUtil.renderPlayer;
+
 @Mixin(InGameHud.class)
 @Feature("Padded HUD")
 public class InGameHudMixin {
+    @Shadow
+    @Final
+    private Minecraft mc;
+
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/Window;getWidth()I"), method = "render")
     public int getWidth(Window instance) {
         return instance.getWidth() - 20;
@@ -53,23 +61,43 @@ public class InGameHudMixin {
     }
 
     // CUSTOM ELEMENTS //
-    @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", opcode = Opcodes.GETFIELD), method = "render")
-    @Feature("HUD Position element")
-    public boolean debugEnabled(GameOptions instance) {
-        boolean value = instance.debugEnabled;
-        if (!value) {
-            Minecraft mc = Minecraft.getMinecraft();
-            String text = String.format("Position: %d, %d, %d", (int)mc.playerEntity.x, (int)mc.playerEntity.y, (int)mc.playerEntity.z);
-            int y = 55;
+    @Inject(at = @At("TAIL"), method = "render")
+    @Feature("HUD elements")
+    public void debugEnabled(float deltaTick, boolean inScreen, int mouseX, int mouseY, CallbackInfo ci) {
+        if (!mc.options.debugEnabled) {
+            GL11.glPushMatrix();
+            GL11.glTranslated(10, 10, 0);
 
-            DrawableHelper.fill(-20, y, -20 + 9*2 + mc.textRenderer.getStringWidth(text), y + 16, 0xaa000000);
-            mc.textRenderer.method_956(
-                    text,
-                    -6, y + 4,
-                    0xffffffff
-            );
+            renderPosition(mc);
+
+            if (
+                    EntityRenderDispatcher.INSTANCE.cameraEntity != null &&
+
+                    mc.playerEntity != null &&
+                    mc.playerEntity.skinUrl != null &&
+                    mc.playerEntity.getTexture() != null &&
+                    mc.cameraEntity != null &&
+
+                    mc.options.perspective == 0 &&
+                    mc.currentScreen == null
+            ) {
+                renderPlayer(mc, 20, 40, 20, mc.playerEntity.yaw, mc.playerEntity.pitch);
+            }
+
+            GL11.glPopMatrix();
         }
+    }
 
-        return value;
+    @Unique
+    private static void renderPosition(Minecraft mc) {
+        String text = String.format("Position: %d, %d, %d", (int)mc.playerEntity.x, (int)mc.playerEntity.y, (int)mc.playerEntity.z);
+        int y = 55;
+
+        DrawableHelper.fill(-20, y, -20 + 9*2 + mc.textRenderer.getStringWidth(text), y + 16, 0xaa000000);
+        mc.textRenderer.method_956(
+                text,
+                -6, y + 4,
+                0xffffffff
+        );
     }
 }
